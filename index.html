@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nihongo Master Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="logo">
+            <div class="logo-icon">🦉</div>
+            <span class="gradient-text">Nihongo</span>
+        </div>
+        <div class="top-right">
+            <div class="streak-mini">
+                <i class="fas fa-fire"></i>
+                <span id="streak-display">3</span>
+            </div>
+            <div class="avatar-mini" onclick="navigate('account')">🦉</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- HOME SCREEN -->
+        <section id="screen-home" class="screen active">
+            <div class="hero-section anim-slide-down">
+                <div class="hero-greeting">Ohayou! 👋</div>
+                <h1 class="hero-title">Siap belajar<br>Jepang hari ini?</h1>
+                <div class="hero-progress">
+                    <div class="hero-progress-bar" id="hero-progress-bar" style="width: 0%"></div>
+                </div>
+                <div class="hero-stats">
+                    <span>Target Harian</span>
+                    <span id="hero-progress-text">0/50 XP</span>
+                </div>
+            </div>
+
+            <div class="quick-stats anim-slide-up">
+                <div class="quick-stat">
+                    <div class="quick-stat-icon" style="background: rgba(255,75,75,0.15); color: var(--danger);">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="quick-stat-value" id="stat-streak">3</div>
+                    <div class="quick-stat-label">Streak</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="quick-stat-icon" style="background: rgba(255,200,0,0.15); color: var(--warning);">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="quick-stat-value" id="stat-xp">0</div>
+                    <div class="quick-stat-label">XP</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="quick-stat-icon" style="background: rgba(28,176,246,0.15); color: var(--secondary);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="quick-stat-value" id="stat-words">0</div>
+                    <div class="quick-stat-label">Kata</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="quick-stat-icon" style="background: rgba(206,130,255,0.15); color: var(--accent);">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="quick-stat-value" id="stat-level">1</div>
+                    <div class="quick-stat-label">Level</div>
+                </div>
+            </div>
+
+            <div class="daily-challenge anim-slide-up" onclick="navigate('quiz')">
+                <h3>🎯 Tantangan Harian</h3>
+                <p>Selesaikan quiz untuk dapat +100 XP!</p>
+                <button class="btn btn-primary" style="background: white; color: var(--accent); box-shadow: 0 4px 0 #ddd;">
+                    Mulai Sekarang
+                </button>
+            </div>
+
+            <div class="section-title">
+                <h3>📚 Mulai Belajar</h3>
+            </div>
+
+            <div class="main-menu">
+                <div class="menu-card hiragana anim-slide-up" style="animation-delay:0.05s" onclick="navigate('hiragana')">
+                    <div class="menu-icon" style="background: var(--gradient-primary);">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>Hiragana</h4>
+                    <p>Belajar huruf dasar</p>
+                    <span class="menu-badge">Mulai</span>
+                </div>
+                <div class="menu-card katakana anim-slide-up" style="animation-delay:0.1s" onclick="navigate('katakana')">
+                    <div class="menu-icon" style="background: var(--gradient-secondary);">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h4>Katakana</h4>
+                    <p>Belajar huruf asing</p>
+                    <span class="menu-badge">Mulai</span>
+                </div>
+                <div class="menu-card kanji anim-slide-up" style="animation-delay:0.15s" onclick="navigate('kanji')">
+                    <div class="menu-icon" style="background: var(--gradient-kanji);">
+                        <span style="font-family:'Noto Sans JP'; font-weight:900;">漢</span>
+                    </div>
+                    <h4>Kanji</h4>
+                    <p>JLPT N5 - N1</p>
+                    <span class="menu-badge">5 Level</span>
+                </div>
+                <div class="menu-card quiz anim-slide-up" style="animation-delay:0.2s" onclick="navigate('quiz')">
+                    <div class="menu-icon" style="background: var(--gradient-accent);">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>Quiz</h4>
+                    <p>Uji pengetahuanmu</p>
+                    <span class="menu-badge">10 soal</span>
+                </div>
+                <div class="menu-card game anim-slide-up" style="animation-delay:0.25s" onclick="navigate('game')">
+                    <div class="menu-icon" style="background: linear-gradient(135deg, #FF9600, #FFC800);">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h4>Tebak Kata</h4>
+                    <p>Tebak arti kata</p>
+                    <span class="menu-badge">3 Mode</span>
+                </div>
+                <div class="menu-card practice anim-slide-up" style="animation-delay:0.3s" onclick="navigate('practice')">
+                    <div class="menu-icon" style="background: var(--gradient-ocean);">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h4>Latihan</h4>
+                    <p>Susun kalimat</p>
+                    <span class="menu-badge">Sehari-hari</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- HIRAGANA SCREEN -->
+        <section id="screen-hiragana" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Hiragana</h2>
+            </div>
+            <div class="tabs" id="hiragana-tabs">
+                <div class="tab active" onclick="switchHiraganaTab('all', this)">Semua</div>
+                <div class="tab" onclick="switchHiraganaTab('dakuon', this)">Dakuon</div>
+                <div class="tab" onclick="switchHiraganaTab('handakuon', this)">Handakuon</div>
+                <div class="tab" onclick="switchHiraganaTab('youon', this)">Youon</div>
+            </div>
+            <div class="char-grid" id="hiragana-grid"></div>
+        </section>
+
+        <!-- KATAKANA SCREEN -->
+        <section id="screen-katakana" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Katakana</h2>
+            </div>
+            <div class="tabs" id="katakana-tabs">
+                <div class="tab active" onclick="switchKatakanaTab('all', this)">Semua</div>
+                <div class="tab" onclick="switchKatakanaTab('dakuon', this)">Dakuon</div>
+                <div class="tab" onclick="switchKatakanaTab('handakuon', this)">Handakuon</div>
+                <div class="tab" onclick="switchKatakanaTab('youon', this)">Youon</div>
+            </div>
+            <div class="char-grid" id="katakana-grid"></div>
+        </section>
+
+        <!-- KANJI SCREEN -->
+        <section id="screen-kanji" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Kanji</h2>
+            </div>
+            <div class="tabs" id="kanji-tabs">
+                <div class="tab active" onclick="switchKanjiTab('N5', this)">N5</div>
+                <div class="tab" onclick="switchKanjiTab('N4', this)">N4</div>
+                <div class="tab" onclick="switchKanjiTab('N3', this)">N3</div>
+                <div class="tab" onclick="switchKanjiTab('N2', this)">N2</div>
+                <div class="tab" onclick="switchKanjiTab('N1', this)">N1</div>
+                <div class="tab" onclick="switchKanjiTab('basic', this)">Basic</div>
+            </div>
+            <div class="card" style="background: var(--gradient-kanji); color: white; margin-bottom: 16px;">
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="font-size:2.5rem;">🎌</div>
+                    <div>
+                        <div style="font-weight:800; font-size:1.05rem;" id="kanji-level-title">JLPT N5 - Pemula</div>
+                        <div style="font-size:0.8rem; opacity:0.9;" id="kanji-level-desc">10 kanji dasar</div>
+                    </div>
+                </div>
+            </div>
+            <div class="char-grid" id="kanji-grid"></div>
+        </section>
+
+        <!-- QUIZ SCREEN -->
+        <section id="screen-quiz" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 style="flex:1;">Quiz</h2>
+            </div>
+
+            <div class="quiz-header">
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quiz-progress" style="width:0%"></div>
+                </div>
+                <div style="font-weight:900; color:var(--muted);" id="quiz-counter">1/10</div>
+            </div>
+
+            <div id="quiz-container" class="anim-fade">
+                <div class="quiz-question-card">
+                    <div class="quiz-prompt" id="quiz-prompt">Huruf apakah ini?</div>
+                    <div class="quiz-char" id="quiz-question">あ</div>
+                    <div class="quiz-romaji-hint" id="quiz-romaji">a</div>
+                </div>
+                <div class="quiz-options" id="quiz-options"></div>
+            </div>
+        </section>
+
+        <!-- GAME: TEBAK KATA -->
+        <section id="screen-game" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Tebak Kata</h2>
+            </div>
+
+            <div id="game-setup">
+                <div class="card" style="text-align:center; margin-bottom:16px; background: var(--gradient-sunset); color:white;">
+                    <div style="font-size:3rem; margin-bottom:6px;">🎯</div>
+                    <h3 style="font-weight:900; font-size:1.2rem; margin-bottom:4px;">Pilih Kesulitan</h3>
+                    <p style="font-size:0.85rem; opacity:0.9;">Sesuaikan dengan kemampuanmu</p>
+                </div>
+
+                <div class="difficulty-selector">
+                    <div class="diff-card active" onclick="selectDifficulty('easy', this)">
+                        <div class="diff-icon">🌱</div>
+                        <div class="diff-name">Mudah</div>
+                        <div class="diff-desc">4 pilihan<br>15 detik</div>
+                    </div>
+                    <div class="diff-card" onclick="selectDifficulty('normal', this)">
+                        <div class="diff-icon">⚡</div>
+                        <div class="diff-name">Normal</div>
+                        <div class="diff-desc">4 pilihan<br>10 detik</div>
+                    </div>
+                    <div class="diff-card" onclick="selectDifficulty('hard', this)">
+                        <div class="diff-icon">🔥</div>
+                        <div class="diff-name">Sulit</div>
+                        <div class="diff-desc">6 pilihan<br>7 detik</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" style="width:100%;" onclick="startGame()">
+                    <i class="fas fa-play"></i> Mulai Game
+                </button>
+            </div>
+
+            <div id="game-play" style="display:none;">
+                <div class="quiz-header">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="game-progress" style="width:0%"></div>
+                    </div>
+                    <div class="quiz-timer" id="game-timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="game-time">10</span>
+                    </div>
+                </div>
+
+                <div class="game-display">
+                    <div class="game-word-jp" id="game-word-jp">さくら</div>
+                    <div class="game-word-romaji" id="game-word-romaji">(sakura)</div>
+                </div>
+
+                <div class="game-stats">
+                    <div class="game-stat">
+                        <div class="game-stat-value" style="color:var(--primary);" id="game-score">0</div>
+                        <div class="game-stat-label">Skor</div>
+                    </div>
+                    <div class="game-stat">
+                        <div class="game-stat-value" style="color:var(--secondary);" id="game-correct">0</div>
+                        <div class="game-stat-label">Benar</div>
+                    </div>
+                    <div class="game-stat">
+                        <div class="game-stat-value" style="color:var(--danger);" id="game-wrong">0</div>
+                        <div class="game-stat-label">Salah</div>
+                    </div>
+                </div>
+
+                <div class="quiz-options" id="game-options"></div>
+            </div>
+
+            <div id="game-result" style="display:none;"></div>
+        </section>
+
+        <!-- PRACTICE: MENYUSUN KATA -->
+        <section id="screen-practice" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Latihan</h2>
+            </div>
+
+            <div class="card" style="background: var(--gradient-ocean); color: white; margin-bottom: 16px;">
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="font-size:2.5rem;">💬</div>
+                    <div>
+                        <div style="font-weight:800; font-size:1.05rem;">Bahasa Jepang Sehari-hari</div>
+                        <div style="font-size:0.8rem; opacity:0.9;">Susun kata menjadi kalimat</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-header">
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="practice-progress" style="width:0%"></div>
+                </div>
+                <div style="font-weight:900; color:var(--muted);" id="practice-counter">1/5</div>
+            </div>
+
+            <div id="practice-area">
+                <div class="practice-sentence">
+                    <div class="practice-prompt">Terjemahkan:</div>
+                    <div class="practice-meaning" id="practice-meaning">"Saya adalah murid"</div>
+                    <div class="practice-romaji-hint" id="practice-romaji">(Watashi wa gakusei desu)</div>
+                    <div class="practice-answer-area" id="practice-answer"></div>
+                </div>
+
+                <div class="word-bank" id="word-bank"></div>
+
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-ghost" style="flex:1;" onclick="resetPractice()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                    <button class="btn btn-primary" style="flex:2;" onclick="checkPractice()">
+                        <i class="fas fa-check"></i> Periksa
+                    </button>
+                </div>
+            </div>
+
+            <div id="practice-result" style="display:none;"></div>
+        </section>
+
+        <!-- ACCOUNT SCREEN -->
+        <section id="screen-account" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Akun Saya</h2>
+            </div>
+
+            <div class="profile-header">
+                <div class="profile-avatar">🦉</div>
+                <div class="profile-name" id="profile-name">Pelajar Baru</div>
+                <div class="profile-title">Nihongo Master since 2026</div>
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="acc-level">1</div>
+                        <div class="profile-stat-label">Level</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="acc-xp">0</div>
+                        <div class="profile-stat-label">Total XP</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="acc-streak">3</div>
+                        <div class="profile-stat-label">Streak</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="account-section">
+                <div class="account-item" onclick="showToast('✏️ Edit profil')">
+                    <div class="account-item-icon" style="background: var(--gradient-primary);">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Edit Profil</div>
+                        <div class="account-item-subtitle">Ubah nama, avatar, bio</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+                <div class="account-item" onclick="showToast('📊 Statistik detail')">
+                    <div class="account-item-icon" style="background: var(--gradient-secondary);">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Statistik Belajar</div>
+                        <div class="account-item-subtitle">Lihat progres detail</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+                <div class="account-item" onclick="showToast('🏅 Pencapaian')">
+                    <div class="account-item-icon" style="background: var(--gradient-gold);">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Pencapaian</div>
+                        <div class="account-item-subtitle">12 dari 50 badge</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+            </div>
+
+            <div class="account-section">
+                <div class="account-item" onclick="showToast('⭐ Upgrade Premium')">
+                    <div class="account-item-icon" style="background: linear-gradient(135deg, #FFC800, #FF9600);">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Nihongo Premium</div>
+                        <div class="account-item-subtitle">Buka semua fitur tanpa batas</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+                <div class="account-item" onclick="navigate('leaderboard')">
+                    <div class="account-item-icon" style="background: var(--gradient-accent);">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Leaderboard</div>
+                        <div class="account-item-subtitle">Lihat peringkat global</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+            </div>
+
+            <div class="account-section">
+                <div class="account-item">
+                    <div class="account-item-icon" style="background: var(--gradient-night);">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Mode Gelap</div>
+                        <div class="account-item-subtitle">Nyaman untuk mata</div>
+                    </div>
+                    <div class="toggle-switch" id="dark-toggle" onclick="toggleTheme()"></div>
+                </div>
+                <div class="account-item">
+                    <div class="account-item-icon" style="background: var(--gradient-primary);">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Notifikasi</div>
+                        <div class="account-item-subtitle">Ingatkan belajar harian</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                <div class="account-item">
+                    <div class="account-item-icon" style="background: var(--gradient-fire);">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Suara</div>
+                        <div class="account-item-subtitle">Efek suara & audio</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                </div>
+            </div>
+
+            <div class="account-section">
+                <div class="account-item" onclick="showToast('🌐 Pilih bahasa')">
+                    <div class="account-item-icon" style="background: var(--gradient-accent);">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Bahasa</div>
+                        <div class="account-item-subtitle">Indonesia</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+                <div class="account-item" onclick="showToast('🔐 Privasi & keamanan')">
+                    <div class="account-item-icon" style="background: linear-gradient(135deg, #4FC3F7, #1CB0F6);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Privasi & Keamanan</div>
+                        <div class="account-item-subtitle">Kelola data akun</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+                <div class="account-item" onclick="showToast('❓ Bantuan')">
+                    <div class="account-item-icon" style="background: linear-gradient(135deg, #CE82FF, #FF86D0);">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title">Bantuan & FAQ</div>
+                        <div class="account-item-subtitle">Pusat bantuan</div>
+                    </div>
+                    <i class="fas fa-chevron-right account-item-arrow"></i>
+                </div>
+                <div class="account-item" onclick="logout()" style="color: var(--danger);">
+                    <div class="account-item-icon" style="background: linear-gradient(135deg, #FF4B4B, #FF9600);">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <div class="account-item-content">
+                        <div class="account-item-title" style="color: var(--danger);">Keluar</div>
+                        <div class="account-item-subtitle">Logout dari akun</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center; padding:20px; color:var(--muted); font-size:0.8rem; font-weight:600;">
+                Nihongo Master v3.0<br>
+                Made with ❤️ for Japanese Learners
+            </div>
+        </section>
+
+        <!-- LEADERBOARD SCREEN -->
+        <section id="screen-leaderboard" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="navigate('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Leaderboard</h2>
+            </div>
+
+            <div class="leaderboard-podium anim-slide-down">
+                <div class="podium-item">
+                    <div class="podium-rank">🥈</div>
+                    <div class="podium-avatar" style="background: var(--gradient-secondary);">🐼</div>
+                    <div class="podium-name">Sakura</div>
+                    <div class="podium-xp">12,450 XP</div>
+                    <div class="podium-base">2</div>
+                </div>
+                <div class="podium-item">
+                    <div class="podium-rank">👑</div>
+                    <div class="podium-avatar" style="background: var(--gradient-gold);">🦊</div>
+                    <div class="podium-name">Hiroshi</div>
+                    <div class="podium-xp">18,920 XP</div>
+                    <div class="podium-base">1</div>
+                </div>
+                <div class="podium-item">
+                    <div class="podium-rank">🥉</div>
+                    <div class="podium-avatar" style="background: var(--gradient-accent);">🐰</div>
+                    <div class="podium-name">Yuki</div>
+                    <div class="podium-xp">9,870 XP</div>
+                    <div class="podium-base">3</div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h3>🏆 Peringkat Global</h3>
+            </div>
+
+            <div class="leaderboard-list" id="leaderboard-list"></div>
+        </section>
+    </div>
+
+    <!-- BOTTOM NAV (4 items) -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="navigate('home')">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </div>
+        <div class="nav-item" onclick="navigate('leaderboard')">
+            <i class="fas fa-trophy"></i>
+            <span>Leaderboard</span>
+        </div>
+        <div class="nav-item" onclick="navigate('account')">
+            <i class="fas fa-user-circle"></i>
+            <span>Akun</span>
+        </div>
+    </nav>
+
+    <!-- MODAL DETAIL HURUF -->
+    <div class="modal-overlay" id="char-modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="document.getElementById('char-modal').classList.remove('active')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div style="font-size:0.8rem; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:1px;">Detail Huruf</div>
+            <div class="modal-jp" id="modal-jp">あ</div>
+            <button class="audio-btn" onclick="playAudio(currentModalData.char || currentModalData.kanji)">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <div class="modal-romaji" id="modal-romaji">a</div>
+            <div class="modal-meaning" id="modal-meaning">-</div>
+            <div class="example-card" id="modal-example-card">
+                <div style="font-size:0.7rem; color:var(--muted); font-weight:700; margin-bottom:6px;">CONTOH KATA</div>
+                <div class="example-word" id="modal-example">あめ (ame)</div>
+                <div class="example-meaning" id="modal-example-meaning">Hujan</div>
+            </div>
+            <button class="btn btn-primary" style="width:100%; margin-top:16px;" onclick="document.getElementById('char-modal').classList.remove('active')">
+                Mengerti
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle" style="color:var(--primary);"></i>
+        <span id="toast-message">Notifikasi</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
